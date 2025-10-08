@@ -1,0 +1,28 @@
+{
+  "name": "ethers-js-tutorial",
+  "version": "1.0.0",
+  "description": "Ethers.js 초보자 학습 자료",
+  "main": "index.js",
+  "scripts": {
+    "01": "node 01-provider.js",
+    "02": "node 02-wallet.js",
+    "03": "node 03-transaction.js",
+    "04": "node 04-contract-read.js",
+    "05": "node 05-contract-write.js",
+    "06": "node 06-practical-example.js",
+    "start": "node 01-provider.js"
+  },
+  "keywords": [
+    "ethers",
+    "ethereum",
+    "blockchain",
+    "web3",
+    "tutorial"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ethers": "^6.15.0"
+  }
+}
