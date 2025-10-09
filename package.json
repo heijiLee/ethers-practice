@@ -10,7 +10,8 @@
     "04": "node 04-contract-read.js",
     "05": "node 05-contract-write.js",
     "06": "node 06-practical-example.js",
-    "start": "node 01-provider.js"
+    "start": "node 01-provider.js",
+    "get-address": "node get-wallet-address.js"
   },
   "keywords": [
     "ethers",

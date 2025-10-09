@@ -9,6 +9,9 @@
  * 이 예제에서는 읽기만 합니다 (무료, 가스비 없음)
  */
 
+// .env 파일에서 환경 변수 불러오기
+require('dotenv').config();
+
 const { ethers } = require('ethers');
 
 // ============================================
@@ -112,14 +115,17 @@ async function readContractExamples() {
     // ------------------------------
     console.log('3️⃣ 잔액 조회:');
     
-    // 테스트 주소 (본인 주소로 변경하세요)
-    const testAddress = '0x0000000000000000000000000000000000000000'; // 실제 Sepolia 주소로 변경
-    const balance = await testTokenContract.balanceOf(testAddress);
+    // .env 파일에서 지갑 주소 가져오기
+    const myAddress = process.env.WALLET_ADDRESS || '0x0000000000000000000000000000000000000000';
+    const balance = await testTokenContract.balanceOf(myAddress);
     const balanceFormatted = ethers.formatUnits(balance, decimals);
     
-    console.log('  - 주소:', testAddress);
+    console.log('  - 주소:', myAddress);
     console.log('  - 잔액:', balanceFormatted, symbol);
-    console.log('  💡 본인의 Sepolia 주소로 변경하면 실제 잔액을 볼 수 있습니다');
+    
+    if (myAddress === '0x0000000000000000000000000000000000000000') {
+      console.log('  💡 .env 파일에 WALLET_ADDRESS를 설정하면 실제 잔액을 볼 수 있습니다');
+    }
     console.log('');
 
     // ------------------------------
@@ -127,12 +133,30 @@ async function readContractExamples() {
     // ------------------------------
     console.log('4️⃣ 여러 주소 잔액 조회:');
     
-    // 테스트 주소들 (본인 주소들로 변경하세요)
-    const addresses = [
-      '0x0000000000000000000000000000000000000000', // 테스트 주소 1
-      '0x0000000000000000000000000000000000000001', // 테스트 주소 2
-      '0x0000000000000000000000000000000000000002', // 테스트 주소 3
-    ];
+    // .env 파일에서 여러 지갑 주소 가져오기
+    const addresses = [];
+    
+    // WALLET_ADDRESS (메인 주소)
+    if (process.env.WALLET_ADDRESS) {
+      addresses.push(process.env.WALLET_ADDRESS);
+    }
+    
+    // WALLET_ADDRESS_2 (추가 주소 1)
+    if (process.env.WALLET_ADDRESS_2) {
+      addresses.push(process.env.WALLET_ADDRESS_2);
+    }
+    
+    // WALLET_ADDRESS_3 (추가 주소 2)
+    if (process.env.WALLET_ADDRESS_3) {
+      addresses.push(process.env.WALLET_ADDRESS_3);
+    }
+    
+    // 주소가 없으면 기본 주소 사용
+    if (addresses.length === 0) {
+      addresses.push('0x0000000000000000000000000000000000000000');
+      addresses.push('0x0000000000000000000000000000000000000001');
+      addresses.push('0x0000000000000000000000000000000000000002');
+    }
 
     // Promise.all로 병렬 조회 (빠름!)
     const balances = await Promise.all(
@@ -143,7 +167,10 @@ async function readContractExamples() {
       const bal = ethers.formatUnits(balances[i], decimals);
       console.log(`  ${addr}: ${bal} ${symbol}`);
     });
-    console.log('  💡 본인의 Sepolia 주소들로 변경하세요');
+    
+    if (!process.env.WALLET_ADDRESS) {
+      console.log('  💡 .env 파일에 WALLET_ADDRESS, WALLET_ADDRESS_2 등을 설정하세요');
+    }
     console.log('');
 
   } catch (error) {
@@ -294,8 +321,8 @@ console.log('실제 토큰 잔액을 보려면 본인의 Sepolia 주소로 변�
 console.log('');
 
 // 주석 해제하고 실행:
-// readContractExamples();
-// uniswapExample();
-// ensExample();
+readContractExamples();
+uniswapExample();
+ensExample();
 
 console.log('다음 단계: 05-contract-write.js에서 컨트랙트에 쓰기를 배워보세요!\n');

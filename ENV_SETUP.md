@@ -36,6 +36,14 @@ touch .env
 # 개인키 (⚠️ 테스트 지갑만 사용하세요!)
 PRIVATE_KEY=0x여기에_본인의_개인키_입력
 
+# 지갑 주소들
+WALLET_ADDRESS=0x여기에_지갑_주소_입력
+WALLET_ADDRESS_2=0x추가_주소_1 (선택사항)
+WALLET_ADDRESS_3=0x추가_주소_2 (선택사항)
+
+# 토큰/ETH를 받을 주소
+SUBMIT_ADDRESS=0x토큰을_받을_주소 (선택사항)
+
 # RPC URLs
 SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
 MAINNET_RPC_URL=https://eth.public-rpc.com
@@ -45,9 +53,9 @@ INFURA_API_KEY=
 ALCHEMY_API_KEY=
 ```
 
-### 3단계: 개인키 가져오기
+### 3단계: 개인키와 주소 가져오기
 
-**MetaMask에서 개인키 내보내기:**
+**A. MetaMask에서 개인키 내보내기:**
 1. MetaMask 열기
 2. 계정 메뉴 클릭 (오른쪽 상단)
 3. "계정 세부정보" 클릭
@@ -56,10 +64,23 @@ ALCHEMY_API_KEY=
 6. 개인키 복사
 7. `.env` 파일의 `PRIVATE_KEY=` 뒤에 붙여넣기
 
+**B. MetaMask에서 지갑 주소 복사:**
+1. MetaMask 열기
+2. 계정 이름 클릭 (주소가 표시됨)
+3. 주소 클릭하여 복사 (예: `0x1234...abcd`)
+4. `.env` 파일의 `WALLET_ADDRESS=` 뒤에 붙여넣기
+
+**C. 추가 주소 (선택사항):**
+- 여러 지갑을 사용한다면:
+  - `WALLET_ADDRESS_2`: 두 번째 지갑 주소
+  - `WALLET_ADDRESS_3`: 세 번째 지갑 주소
+  - `SUBMIT_ADDRESS`: 토큰/ETH를 받을 주소 (05-contract-write.js에서 사용)
+
 **⚠️ 주의사항:**
 - 반드시 **테스트 지갑**만 사용하세요!
 - 메인 지갑의 개인키는 절대 사용하지 마세요!
 - 새 지갑을 만들어서 테스트용으로 사용하는 것을 권장합니다
+- **개인키와 주소가 일치하는지 확인하세요!**
 
 ### 4단계: 완료!
 
@@ -78,12 +99,22 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 ```bash
 # 개인키 (필수)
-PRIVATE_KEY=0x1234567890abcdef...
+PRIVATE_KEY=0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+# 지갑 주소 (필수 - 04-contract-read.js 등에서 사용)
+WALLET_ADDRESS=0x1234567890123456789012345678901234567890
 ```
 
 ### 선택 환경 변수
 
 ```bash
+# 추가 지갑 주소들 (여러 주소 조회시 사용)
+WALLET_ADDRESS_2=0xabcdef1234567890abcdef1234567890abcdef12
+WALLET_ADDRESS_3=0x567890abcdef1234567890abcdef1234567890ab
+
+# 토큰/ETH를 받을 주소 (05-contract-write.js에서 사용)
+SUBMIT_ADDRESS=0x1234567890abcdef1234567890abcdef12345678
+
 # Sepolia RPC URL (기본값 있음)
 SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
 
@@ -109,10 +140,12 @@ require('dotenv').config();
 
 // 환경 변수 사용
 const privateKey = process.env.PRIVATE_KEY;
+const walletAddress = process.env.WALLET_ADDRESS;
 const rpcUrl = process.env.SEPOLIA_RPC_URL;
 
 // 기본값 설정 (환경 변수가 없을 때)
 const privateKey = process.env.PRIVATE_KEY || 'YOUR_DEFAULT_KEY';
+const walletAddress = process.env.WALLET_ADDRESS || '0x0000000000000000000000000000000000000000';
 ```
 
 ### 실제 예제
@@ -123,6 +156,7 @@ const { ethers } = require('ethers');
 
 // .env에서 값 가져오기
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const WALLET_ADDRESS = process.env.WALLET_ADDRESS;
 const RPC_URL = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
 
 // 사용
@@ -130,6 +164,8 @@ const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 
 console.log('지갑 주소:', wallet.address);
+console.log('.env의 주소:', WALLET_ADDRESS);
+console.log('일치 여부:', wallet.address === WALLET_ADDRESS);
 ```
 
 ---

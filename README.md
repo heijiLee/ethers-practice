@@ -44,6 +44,7 @@
 6. **06-practical-example.js** - 실전 예제 (복사해서 바로 사용 가능)
 7. **CHEATSHEET.md** - 빠른 참고용 치트시트
 8. **EXERCISES.md** - 연습 문제 (초급 → 고급)
+9. **COMMON_ERRORS.md** - 자주 발생하는 에러 해결법 ⭐
 
 ---
 
@@ -116,7 +117,10 @@ A: Faucet 사이트에서 무료로 받을 수 있습니다.
 ├── START_HERE.md             # 첫 시작 가이드
 ├── CHEATSHEET.md             # 빠른 참고용 치트시트
 ├── EXERCISES.md              # 연습 문제 모음
-├── NETWORK_INFO.md           # 네트워크 설정 가이드 ⭐
+├── NETWORK_INFO.md           # 네트워크 설정 가이드
+├── ENV_SETUP.md              # 환경 변수 설정 가이드
+├── COMMON_ERRORS.md          # 에러 해결 가이드 ⭐
+├── .env.example              # 환경 변수 예제
 ├── .gitignore                # Git 무시 파일 (개인키 보호)
 ├── package.json              # 프로젝트 설정
 │
@@ -124,8 +128,9 @@ A: Faucet 사이트에서 무료로 받을 수 있습니다.
 ├── 02-wallet.js              # Wallet 관리 (Sepolia)
 ├── 03-transaction.js         # 트랜잭션 전송 (Sepolia)
 ├── 04-contract-read.js       # 컨트랙트 읽기 (Sepolia)
-├── 05-contract-write.js      # 컨트랙트 쓰기 (Sepolia)
-└── 06-practical-example.js   # 실전 예제 (Sepolia)
+├── 05-contract-write.js      # 컨트랙트 쓰기 + 토큰 생성 ⭐ (Sepolia)
+├── 06-practical-example.js   # 실전 예제 (Sepolia)
+└── get-wallet-address.js     # 지갑 주소 계산 유틸
 ```
 
 ---
