@@ -23,9 +23,6 @@ console.log('ABI (Application Binary Interface)란?\n');
 console.log('ABI는 스마트 컨트랙트의 "사용 설명서"입니다.');
 console.log('컨트랙트에 어떤 함수가 있는지, 어떤 매개변수가 필요한지 알려줍니다.\n');
 
-console.log('예시:');
-console.log('컨트랙트: 자동판매기');
-console.log('ABI: 사용 설명서 (어떤 버튼이 있는지, 돈을 얼마나 넣어야 하는지)\n');
 
 // ============================================
 // 2. ERC-20 토큰 읽기 (가장 기본적인 예제)
@@ -180,149 +177,28 @@ async function readContractExamples() {
   console.log('읽기 예제 완료!\n');
 }
 
-// ============================================
-// 5. 다른 컨트랙트 예제: Uniswap (Sepolia)
-// ============================================
 
-async function uniswapExample() {
-  console.log('Uniswap 컨트랙트 읽기 (Sepolia 테스트넷)\n');
 
-  console.log('참고: Sepolia에는 Uniswap V2가 배포되어 있지 않을 수 있습니다.');
-  console.log('대신 다른 테스트 DEX를 사용하거나, 직접 컨트랙트를 배포해야 합니다.');
-  console.log('');
-  
-  console.log('메인넷 예제 (참고용):');
-  console.log('- Uniswap V2 Factory: 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f');
-  console.log('- getPair() 함수로 거래쌍 조회');
-  console.log('- allPairsLength() 함수로 총 페어 개수 조회');
-  console.log('');
-  
-  console.log('Sepolia에서 테스트하려면:');
-  console.log('1. Sepolia에 배포된 DEX 찾기');
-  console.log('2. 또는 직접 테스트 컨트랙트 배포');
-  console.log('3. 컨트랙트 주소를 이 함수에 추가');
-  console.log('');
-}
+//https://etherscan.io/address/0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f
+// console.log('ABI 얻는 방법\n');
 
-// ============================================
-// 6. ENS (Ethereum Name Service) 예제
-// ============================================
+// console.log('방법 1: Etherscan에서 복사');
+// console.log('1. https://etherscan.io/ 접속');
+// console.log('2. 컨트랙트 주소 검색');
+// console.log('3. "Contract" 탭 클릭');
+// console.log('4. "Code" 섹션에서 ABI 복사');
+// console.log('');
 
-async function ensExample() {
-  console.log('ENS 컨트랙트 읽기\n');
+// console.log('방법 2: 표준 ABI 사용');
+// console.log('- ERC-20: @openzeppelin/contracts 패키지');
+// console.log('- ERC-721: @openzeppelin/contracts 패키지');
+// console.log('- Uniswap: @uniswap/v2-core 패키지');
+// console.log('');
 
-  console.log('참고: ENS는 메인넷에서만 완전히 지원됩니다.');
-  console.log('Sepolia 테스트넷에서는 제한적으로 지원됩니다.');
-  console.log('');
-  
-  console.log('메인넷 ENS 예제 (참고용):');
-  console.log('- ENS Registry: 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e');
-  console.log('- vitalik.eth 같은 이름을 주소로 변환');
-  console.log('- provider.resolveName("vitalik.eth") 사용');
-  console.log('');
-  
-  console.log('Sepolia에서 테스트하려면:');
-  console.log('1. 메인넷 Provider 사용 (읽기만 하므로 무료)');
-  console.log('2. 또는 Sepolia ENS 레지스트리 주소 사용 (제한적)');
-  console.log('');
-}
+// console.log('방법 3: 최소 ABI 작성');
+// console.log('- 필요한 함수 시그니처만 작성');
+// console.log('- Human-Readable 형식 사용');
+// console.log('');
 
-// ============================================
-// 7. 실전 팁
-// ============================================
-
-console.log('컨트랙트 읽기 실전 팁\n');
-
-console.log('1. ABI 구하는 방법:');
-console.log('   - Etherscan에서 Verified 컨트랙트의 ABI 복사');
-console.log('   - 표준 컨트랙트 (ERC-20, ERC-721)는 표준 ABI 사용');
-console.log('   - 필요한 함수만 추출해서 사용 가능 (Human-Readable ABI)');
-console.log('');
-
-console.log('2. 에러 처리:');
-console.log('   - 컨트랙트 주소가 맞는지 확인');
-console.log('   - ABI가 맞는지 확인');
-console.log('   - 네트워크가 맞는지 확인 (메인넷 vs 테스트넷)');
-console.log('');
-
-console.log('3. 최적화:');
-console.log('   - 여러 데이터를 조회할 땐 Promise.all 사용');
-console.log('   - Multicall 컨트랙트로 한번에 조회 (고급)');
-console.log('   - 자주 바뀌지 않는 데이터는 캐싱');
-console.log('');
-
-console.log('4. 유용한 도구:');
-console.log('   - Etherscan: 컨트랙트 정보, ABI 확인');
-console.log('   - Tenderly: 컨트랙트 디버깅');
-console.log('   - The Graph: 컨트랙트 데이터 쿼리');
-console.log('');
-
-// ============================================
-// 8. 전체 ABI vs Human-Readable ABI 비교
-// ============================================
-
-console.log('ABI 형식 비교\n');
-
-console.log('Human-Readable ABI (추천):');
-console.log(`const abi = [
-  'function name() view returns (string)',
-  'function balanceOf(address) view returns (uint256)'
-];`);
-console.log('읽기 쉬움, 필요한 것만 작성\n');
-
-console.log('Full JSON ABI:');
-console.log(`const abi = [
-  {
-    "type": "function",
-    "name": "name",
-    "inputs": [],
-    "outputs": [{"type": "string"}],
-    "stateMutability": "view"
-  }
-];`);
-console.log('완전한 정보, Etherscan에서 복사\n');
-
-// ============================================
-// 9. ABI 얻는 방법 실습
-// ============================================
-
-console.log('ABI 얻는 방법\n');
-
-console.log('방법 1: Etherscan에서 복사');
-console.log('1. https://etherscan.io/ 접속');
-console.log('2. 컨트랙트 주소 검색');
-console.log('3. "Contract" 탭 클릭');
-console.log('4. "Code" 섹션에서 ABI 복사');
-console.log('');
-
-console.log('방법 2: 표준 ABI 사용');
-console.log('- ERC-20: @openzeppelin/contracts 패키지');
-console.log('- ERC-721: @openzeppelin/contracts 패키지');
-console.log('- Uniswap: @uniswap/v2-core 패키지');
-console.log('');
-
-console.log('방법 3: 최소 ABI 작성');
-console.log('- 필요한 함수 시그니처만 작성');
-console.log('- Human-Readable 형식 사용');
-console.log('');
-
-// ============================================
-// 실행
-// ============================================
-
-console.log('\n사용법 (Sepolia 테스트넷):');
-console.log('주석을 해제하고 실행하세요:');
-console.log('  readContractExamples();');
-console.log('  uniswapExample();  // 참고용 (Sepolia에 배포 안됨)');
-console.log('  ensExample();      // 참고용 (메인넷 기능)');
-console.log('');
-console.log('주의: Sepolia 테스트 토큰 주소를 사용합니다');
-console.log('실제 토큰 잔액을 보려면 본인의 Sepolia 주소로 변경하세요');
-console.log('');
-
-// 주석 해제하고 실행:
 readContractExamples();
-uniswapExample();
-ensExample();
 
-console.log('다음 단계: 05-contract-write.js에서 컨트랙트에 쓰기를 배워보세요!\n');
