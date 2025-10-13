@@ -143,16 +143,11 @@ async function sendEthExample() {
 }
 
 // ============================================
-// 4. 여러 트랜잭션 보내기 (Nonce 관리)
+// 4. 여러 트랜잭션 보내기 (Nonce 관리) TODO 
 // ============================================
 
 async function multipleTransactionsExample() {
   console.log('여러 트랜잭션 보내기\n');
-
-  if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('개인키가 설정되지 않았습니다!\n');
-    return;
-  }
 
   try {
     const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
@@ -164,19 +159,13 @@ async function multipleTransactionsExample() {
 
     // 3개의 트랜잭션 동시에 보내기
     const transactions = [];
-
-    for (let i = 0; i < 3; i++) {
-      const tx = {
-        to: '0x0000000000000000000000000000000000000000',
-        value: ethers.parseEther('0.00001'),
-        nonce: nonce + i, // 각각 다른 nonce 사용
-      };
-
-      console.log(`트랜잭션 ${i + 1} 전송 (nonce: ${nonce + i})`);
-      const txResponse = await wallet.sendTransaction(tx);
-      transactions.push(txResponse);
-      console.log('  - 해시:', txResponse.hash);
-    }
+    // TODO 
+    // send multiple transactions w/ different nonce
+    // for (let i = 0; i < 3; i++) {
+    //   const txResponse = 
+    //   transactions.push(txResponse);
+    //   console.log('  - 해시:', txResponse.hash);
+    // }
 
     console.log('');
     console.log('모든 트랜잭션 확인 대기...');
@@ -314,30 +303,10 @@ async function gasOptimizationExample() {
 // 실행
 // ============================================
 
-console.log('\n사용법:');
-console.log('1. Sepolia 테스트넷 준비:');
-console.log('   - MetaMask 같은 지갑에서 Sepolia 네트워크 추가');
-console.log('   - https://sepoliafaucet.com/ 에서 테스트 ETH 받기');
-console.log('');
-console.log('2. 개인키 설정:');
-console.log('   - PRIVATE_KEY 변수에 테스트 지갑 개인키 입력');
-console.log('   - 테스트 지갑만 사용하세요!');
-console.log('');
-console.log('3. 함수 실행:');
-console.log('   sendEthExample();');
-console.log('   multipleTransactionsExample();');
-console.log('   monitorTransactionExample();');
-console.log('   gasOptimizationExample();');
-console.log('');
 
-// ============================================
-// 실행 방법 선택
-// ============================================
-
-// 방법 1: 한 번에 하나씩 실행 (추천)
 // ⚠️ 한 번에 하나씩만 주석 해제하세요!
 
 //sendEthExample();
 //multipleTransactionsExample();
 //monitorTransactionExample();
-gasOptimizationExample();
+//gasOptimizationExample();
