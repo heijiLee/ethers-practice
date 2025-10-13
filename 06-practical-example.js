@@ -1,5 +1,5 @@
 /**
- * 🚀 실전 예제: 실제로 사용 가능한 유틸리티
+ * 실전 예제: 실제로 사용 가능한 유틸리티
  * 
  * 지금까지 배운 내용을 활용한 실용적인 예제들입니다.
  * 복사해서 실제 프로젝트에 바로 사용할 수 있습니다!
@@ -52,7 +52,7 @@ async function getTokenInfo(tokenAddress, userAddress, providerUrl = 'https://rp
 
 // 사용 예제
 async function tokenInfoExample() {
-  console.log('🪙 토큰 정보 조회 유틸 (Sepolia 테스트넷)\n');
+  console.log('토큰 정보 조회 유틸 (Sepolia 테스트넷)\n');
 
   try {
     // Sepolia 테스트 토큰 주소 (예: Sepolia USDC)
@@ -70,7 +70,7 @@ async function tokenInfoExample() {
     console.log('');
 
   } catch (error) {
-    console.error('❌', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -125,7 +125,7 @@ async function getMultipleBalances(addresses, tokenAddress = null, providerUrl =
 
 // 사용 예제
 async function multipleBalancesExample() {
-  console.log('💰 여러 주소 잔액 조회 (Sepolia 테스트넷)\n');
+  console.log('여러 주소 잔액 조회 (Sepolia 테스트넷)\n');
 
   try {
     // 본인의 테스트 주소들로 변경하세요
@@ -141,7 +141,7 @@ async function multipleBalancesExample() {
     balances.forEach((bal, index) => {
       if (bal.error) {
         console.log(`${index + 1}. ${bal.address}`);
-        console.log(`   ❌ Error: ${bal.error}`);
+        console.log(`   에러: ${bal.error}`);
       } else {
         console.log(`${index + 1}. ${bal.address}`);
         console.log(`   ETH: ${bal.ethBalance}`);
@@ -151,7 +151,7 @@ async function multipleBalancesExample() {
     });
 
   } catch (error) {
-    console.error('❌', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -184,7 +184,7 @@ async function getGasAnalysis(providerUrl = 'https://rpc.sepolia.org') {
 
 // 사용 예제
 async function gasAnalysisExample() {
-  console.log('⛽ 가스 가격 분석 (Sepolia 테스트넷)\n');
+  console.log('가스 가격 분석 (Sepolia 테스트넷)\n');
 
   try {
     const gas = await getGasAnalysis();
@@ -206,16 +206,16 @@ async function gasAnalysisExample() {
     // 가스 가격 평가
     const gasPriceNum = parseFloat(gas.gasPrice);
     if (gasPriceNum < 20) {
-      console.log('💚 가스 가격: 낮음 (전송하기 좋은 시간!)');
+      console.log('가스 가격: 낮음 (전송하기 좋은 시간!)');
     } else if (gasPriceNum < 50) {
-      console.log('💛 가스 가격: 보통');
+      console.log('가스 가격: 보통');
     } else {
-      console.log('🔴 가스 가격: 높음 (가능하면 나중에 전송하세요)');
+      console.log('가스 가격: 높음 (가능하면 나중에 전송하세요)');
     }
     console.log('');
 
   } catch (error) {
-    console.error('❌', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -229,15 +229,15 @@ async function gasAnalysisExample() {
 async function trackTransaction(txHash, providerUrl = 'https://rpc.sepolia.org') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
 
-  console.log(`🔍 트랜잭션 추적 시작: ${txHash}\n`);
+  console.log(`트랜잭션 추적 시작: ${txHash}\n`);
 
   try {
     // 1. 트랜잭션 정보 가져오기
-    console.log('1️⃣ 트랜잭션 정보 조회 중...');
+    console.log('1. 트랜잭션 정보 조회 중...');
     const tx = await provider.getTransaction(txHash);
     
     if (!tx) {
-      console.log('❌ 트랜잭션을 찾을 수 없습니다');
+      console.log('트랜잭션을 찾을 수 없습니다');
       return null;
     }
 
@@ -248,11 +248,11 @@ async function trackTransaction(txHash, providerUrl = 'https://rpc.sepolia.org')
     console.log('');
 
     // 2. 확인 대기
-    console.log('2️⃣ 블록 확인 대기 중...');
+    console.log('2. 블록 확인 대기 중...');
     const receipt = await tx.wait();
     
-    console.log(`   ✅ 확인됨!`);
-    console.log(`   Status: ${receipt.status === 1 ? '성공 ✅' : '실패 ❌'}`);
+    console.log(`   확인됨!`);
+    console.log(`   Status: ${receipt.status === 1 ? '성공' : '실패'}`);
     console.log(`   Block: ${receipt.blockNumber}`);
     console.log(`   Gas Used: ${receipt.gasUsed.toString()}`);
     
@@ -262,7 +262,7 @@ async function trackTransaction(txHash, providerUrl = 'https://rpc.sepolia.org')
     console.log('');
 
     // 3. Etherscan 링크
-    console.log(`🔗 Sepolia Etherscan: https://sepolia.etherscan.io/tx/${txHash}`);
+    console.log(`Sepolia Etherscan: https://sepolia.etherscan.io/tx/${txHash}`);
     console.log('');
 
     return {
@@ -277,16 +277,16 @@ async function trackTransaction(txHash, providerUrl = 'https://rpc.sepolia.org')
     };
 
   } catch (error) {
-    console.error('❌', error.message);
+    console.error('에러:', error.message);
     return null;
   }
 }
 
 // 사용 예제
 async function trackTransactionExample() {
-  console.log('🔎 트랜잭션 추적 예제 (Sepolia 테스트넷)\n');
+  console.log('트랜잭션 추적 예제 (Sepolia 테스트넷)\n');
 
-  console.log('💡 사용법:');
+  console.log('사용법:');
   console.log('1. Sepolia 테스트넷에서 트랜잭션을 먼저 전송하세요');
   console.log('2. 받은 트랜잭션 해시를 아래 코드에 입력하세요');
   console.log('3. 주석을 해제하고 실행하세요');
@@ -324,10 +324,10 @@ async function safeTransferToken(
   const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, wallet);
 
   try {
-    console.log('🔐 안전 토큰 전송 시작\n');
+    console.log('안전 토큰 전송 시작\n');
 
     // 1. 토큰 정보 가져오기
-    console.log('1️⃣ 토큰 정보 확인...');
+    console.log('1. 토큰 정보 확인...');
     const [symbol, decimals] = await Promise.all([
       tokenContract.symbol(),
       tokenContract.decimals(),
@@ -336,7 +336,7 @@ async function safeTransferToken(
     console.log('');
 
     // 2. 잔액 확인
-    console.log('2️⃣ 잔액 확인...');
+    console.log('2. 잔액 확인...');
     const balance = await tokenContract.balanceOf(wallet.address);
     const balanceFormatted = ethers.formatUnits(balance, decimals);
     console.log(`   Current Balance: ${balanceFormatted} ${symbol}`);
@@ -356,11 +356,11 @@ async function safeTransferToken(
     if (recipientAddress === wallet.address) {
       throw new Error('자기 자신에게 전송할 수 없습니다');
     }
-    console.log('   ✅ 주소 유효');
+    console.log('   주소 유효');
     console.log('');
 
     // 4. ETH 잔액 확인 (가스비)
-    console.log('4️⃣ 가스비 확인...');
+    console.log('4. 가스비 확인...');
     const ethBalance = await provider.getBalance(wallet.address);
     const gasEstimate = await tokenContract.transfer.estimateGas(recipientAddress, amountWei);
     const feeData = await provider.getFeeData();
@@ -375,28 +375,28 @@ async function safeTransferToken(
     console.log('');
 
     // 5. 사용자 확인 (실제로는 UI에서)
-    console.log('5️⃣ 전송 내역 확인:');
+    console.log('5. 전송 내역 확인:');
     console.log(`   To: ${recipientAddress}`);
     console.log(`   Amount: ${amount} ${symbol}`);
     console.log(`   Gas Cost: ${ethers.formatEther(gasCost)} ETH`);
     console.log('');
 
     // 6. 전송
-    console.log('6️⃣ 전송 중...');
+    console.log('6. 전송 중...');
     const tx = await tokenContract.transfer(recipientAddress, amountWei);
     console.log(`   TX Hash: ${tx.hash}`);
     console.log('');
 
     // 7. 확인 대기
-    console.log('7️⃣ 확인 대기...');
+    console.log('7. 확인 대기...');
     const receipt = await tx.wait();
     
     if (receipt.status === 1) {
-      console.log('   ✅ 전송 성공!');
+      console.log('   전송 성공!');
       console.log(`   Block: ${receipt.blockNumber}`);
       console.log(`   Actual Gas Used: ${receipt.gasUsed.toString()}`);
     } else {
-      console.log('   ❌ 전송 실패');
+      console.log('   전송 실패');
     }
     console.log('');
 
@@ -426,7 +426,7 @@ async function safeTransferToken(
 async function getPortfolio(userAddress, tokenAddresses, providerUrl = 'https://rpc.sepolia.org') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
 
-  console.log(`📊 포트폴리오 조회: ${userAddress}\n`);
+  console.log(`포트폴리오 조회: ${userAddress}\n`);
 
   const portfolio = {
     address: userAddress,
@@ -482,7 +482,7 @@ async function getPortfolio(userAddress, tokenAddresses, providerUrl = 'https://
 
 // 사용 예제
 async function portfolioExample() {
-  console.log('📊 포트폴리오 조회 예제 (Sepolia 테스트넷)\n');
+  console.log('포트폴리오 조회 예제 (Sepolia 테스트넷)\n');
 
   try {
     // 본인의 Sepolia 주소로 변경하세요
@@ -510,7 +510,7 @@ async function portfolioExample() {
     console.log('');
 
   } catch (error) {
-    console.error('❌', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -518,7 +518,7 @@ async function portfolioExample() {
 // 실행 메뉴
 // ============================================
 
-console.log('🚀 실전 예제 모음 (Sepolia 테스트넷)\n');
+console.log('실전 예제 모음 (Sepolia 테스트넷)\n');
 console.log('다음 함수들을 실행해보세요:');
 console.log('');
 console.log('1. tokenInfoExample() - 토큰 정보 조회');
@@ -527,8 +527,8 @@ console.log('3. gasAnalysisExample() - 가스 가격 분석');
 console.log('4. trackTransactionExample() - 트랜잭션 추적');
 console.log('5. portfolioExample() - 포트폴리오 조회');
 console.log('');
-console.log('⚠️ 중요: 본인의 Sepolia 주소로 변경하세요!');
-console.log('💡 이 함수들을 복사해서 실제 프로젝트에 사용하세요!');
+console.log('중요: 본인의 Sepolia 주소로 변경하세요!');
+console.log('이 함수들을 복사해서 실제 프로젝트에 사용하세요!');
 console.log('');
 
 // 주석 해제하고 실행:

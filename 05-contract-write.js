@@ -1,10 +1,10 @@
 /**
- * ✍️ 예제 5: Contract Write - 스마트 컨트랙트 쓰기
+ * 예제 5: Contract Write - 스마트 컨트랙트 쓰기
  * 
  * 컨트랙트에 데이터를 쓰는 작업입니다.
  * 토큰 전송, NFT 민팅, DEX 거래 등이 모두 여기에 해당합니다.
  * 
- * ⚠️ 주의:
+ * 주의:
  * - 가스비가 필요합니다
  * - Wallet (개인키)이 필요합니다
  * - 되돌릴 수 없으니 테스트넷에서 먼저 연습하세요!
@@ -43,19 +43,19 @@ const ERC20_ABI = [
 // 2. 읽기 vs 쓰기 비교
 // ============================================
 
-console.log('📚 읽기 vs 쓰기 비교\n');
+console.log('읽기 vs 쓰기 비교\n');
 
 console.log('읽기 (view/pure 함수):');
-console.log('  ✅ 무료 (가스비 없음)');
-console.log('  ✅ 즉시 결과 반환');
-console.log('  ✅ Provider만 필요');
+console.log('  무료 (가스비 없음)');
+console.log('  즉시 결과 반환');
+console.log('  Provider만 필요');
 console.log('  예: balanceOf(), name(), symbol()');
 console.log('');
 
 console.log('쓰기 (상태 변경 함수):');
-console.log('  ⚠️ 가스비 필요');
-console.log('  ⚠️ 트랜잭션 확인 대기');
-console.log('  ⚠️ Wallet (개인키) 필요');
+console.log('  가스비 필요');
+console.log('  트랜잭션 확인 대기');
+console.log('  Wallet (개인키) 필요');
 console.log('  예: transfer(), approve(), mint()');
 console.log('');
 
@@ -132,27 +132,27 @@ const SIMPLE_TOKEN_ABI = [
 ];
 
 async function createNewTokenExample() {
-  console.log('🪙 새로운 ERC-20 토큰 생성하기\n');
+  console.log('새로운 ERC-20 토큰 생성하기\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!');
-    console.log('💡 .env 파일에 PRIVATE_KEY를 설정하세요\n');
+    console.log('개인키가 설정되지 않았습니다!');
+    console.log('.env 파일에 PRIVATE_KEY를 설정하세요\n');
     return;
   }
 
   try {
     const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
-    console.log('👛 배포자 주소:', wallet.address);
+    console.log('배포자 주소:', wallet.address);
     console.log('');
 
     // ETH 잔액 확인
     const balance = await provider.getBalance(wallet.address);
     const balanceEth = ethers.formatEther(balance);
-    console.log('💰 ETH 잔액:', balanceEth, 'ETH');
+    console.log('ETH 잔액:', balanceEth, 'ETH');
     
     if (balance === 0n) {
-      console.log('❌ ETH가 없습니다! Faucet에서 테스트 ETH를 받으세요.');
-      console.log('🔗 https://sepoliafaucet.com/\n');
+      console.log('ETH가 없습니다! Faucet에서 테스트 ETH를 받으세요.');
+      console.log('https://sepoliafaucet.com/\n');
       return;
     }
     console.log('');
@@ -160,7 +160,7 @@ async function createNewTokenExample() {
     // ------------------------------
     // 단계 1: 토큰 정보 설정
     // ------------------------------
-    console.log('1️⃣ 토큰 정보 설정:');
+    console.log('1. 토큰 정보 설정:');
     
     const tokenName = 'My Test Token';
     const tokenSymbol = 'MTT';
@@ -174,7 +174,7 @@ async function createNewTokenExample() {
     // ------------------------------
     // 단계 2: 컨트랙트 팩토리 생성
     // ------------------------------
-    console.log('2️⃣ 컨트랙트 팩토리 생성:');
+    console.log('2. 컨트랙트 팩토리 생성:');
     
     const contractFactory = new ethers.ContractFactory(
       SIMPLE_TOKEN_ABI,
@@ -182,13 +182,13 @@ async function createNewTokenExample() {
       wallet
     );
     
-    console.log('  ✅ 팩토리 생성 완료');
+    console.log('  팩토리 생성 완료');
     console.log('');
 
     // ------------------------------
     // 단계 3: 가스 예측
     // ------------------------------
-    console.log('3️⃣ 배포 가스 예측:');
+    console.log('3. 배포 가스 예측:');
     
     const deployTx = contractFactory.getDeployTransaction(
       tokenName,
@@ -207,8 +207,8 @@ async function createNewTokenExample() {
     // ------------------------------
     // 단계 4: 컨트랙트 배포
     // ------------------------------
-    console.log('4️⃣ 컨트랙트 배포 중...');
-    console.log('  ⏳ 트랜잭션 전송 중... (1-2분 소요)');
+    console.log('4. 컨트랙트 배포 중...');
+    console.log('  트랜잭션 전송 중... (1-2분 소요)');
     
     const contract = await contractFactory.deploy(
       tokenName,
@@ -216,22 +216,22 @@ async function createNewTokenExample() {
       initialSupply
     );
     
-    console.log(`  📤 배포 트랜잭션 해시: ${contract.deploymentTransaction().hash}`);
-    console.log('  ⏳ 블록 확인 대기 중...');
+    console.log(`  배포 트랜잭션 해시: ${contract.deploymentTransaction().hash}`);
+    console.log('  블록 확인 대기 중...');
     
     await contract.waitForDeployment();
     
     const tokenAddress = await contract.getAddress();
     
     console.log('');
-    console.log('  ✅ 배포 완료!');
-    console.log(`  🎉 토큰 주소: ${tokenAddress}`);
+    console.log('  배포 완료!');
+    console.log(`  토큰 주소: ${tokenAddress}`);
     console.log('');
 
     // ------------------------------
     // 단계 5: 배포된 토큰 정보 확인
     // ------------------------------
-    console.log('5️⃣ 배포된 토큰 확인:');
+    console.log('5. 배포된 토큰 확인:');
     
     const name = await contract.name();
     const symbol = await contract.symbol();
@@ -255,16 +255,16 @@ async function createNewTokenExample() {
     console.log('');
     console.log(`토큰 주소: ${tokenAddress}`);
     console.log('');
-    console.log('🔗 Sepolia Etherscan:');
+    console.log('Sepolia Etherscan:');
     console.log(`   https://sepolia.etherscan.io/address/${tokenAddress}`);
     console.log('');
-    console.log('🔗 배포 트랜잭션:');
+    console.log('배포 트랜잭션:');
     console.log(`   https://sepolia.etherscan.io/tx/${contract.deploymentTransaction().hash}`);
     console.log('');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('');
     
-    console.log('💡 다음 단계:');
+    console.log('다음 단계:');
     console.log('1. 위 토큰 주소를 .env 파일에 저장하세요:');
     console.log(`   TOKEN_ADDRESS=${tokenAddress}`);
     console.log('');
@@ -274,11 +274,11 @@ async function createNewTokenExample() {
     return tokenAddress;
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
     
     if (error.message.includes('insufficient funds')) {
-      console.log('💡 원인: ETH 잔액 부족 (가스비용)');
-      console.log('🔗 Faucet: https://sepoliafaucet.com/');
+      console.log('원인: ETH 잔액 부족 (가스비용)');
+      console.log('Faucet: https://sepoliafaucet.com/');
     }
   }
 }
@@ -288,11 +288,11 @@ async function createNewTokenExample() {
 // ============================================
 
 async function transferTokenExample(tokenAddress = null) {
-  console.log('💸 ERC-20 토큰 전송 예제\n');
+  console.log('ERC-20 토큰 전송 예제\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!');
-    console.log('💡 실행하려면:');
+    console.log('개인키가 설정되지 않았습니다!');
+    console.log('실행하려면:');
     console.log('1. Sepolia 테스트넷 지갑 준비');
     console.log('2. 테스트 토큰 받기 (Faucet 사용)');
     console.log('3. PRIVATE_KEY 변수에 개인키 설정\n');
@@ -302,7 +302,7 @@ async function transferTokenExample(tokenAddress = null) {
   try {
     // Wallet 생성 및 Provider 연결
     const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
-    console.log('👛 지갑 주소:', wallet.address);
+    console.log('지갑 주소:', wallet.address);
     console.log('');
 
     // 토큰 주소 (.env에서 가져오거나 파라미터로 전달받음)
@@ -311,7 +311,7 @@ async function transferTokenExample(tokenAddress = null) {
                           '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'; // Sepolia USDC
     
     if (!tokenAddress && !process.env.TOKEN_ADDRESS) {
-      console.log('💡 팁: .env 파일에 TOKEN_ADDRESS를 설정하거나');
+      console.log('팁: .env 파일에 TOKEN_ADDRESS를 설정하거나');
       console.log('       createNewTokenExample()로 새 토큰을 만드세요!\n');
     }
 
@@ -325,7 +325,7 @@ async function transferTokenExample(tokenAddress = null) {
     // ------------------------------
     // 단계 1: 현재 잔액 확인
     // ------------------------------
-    console.log('1️⃣ 현재 잔액 확인:');
+    console.log('1. 현재 잔액 확인:');
     
     const balance = await tokenContract.balanceOf(wallet.address);
     const decimals = await tokenContract.decimals();
@@ -336,15 +336,15 @@ async function transferTokenExample(tokenAddress = null) {
     console.log('');
 
     if (balance === 0n) {
-      console.log('❌ 토큰이 없습니다!');
-      console.log('💡 테스트 토큰을 먼저 받으세요\n');
+      console.log('토큰이 없습니다!');
+      console.log('테스트 토큰을 먼저 받으세요\n');
       return;
     }
 
     // ------------------------------
     // 단계 2: 전송할 금액 설정
     // ------------------------------
-    console.log('2️⃣ 전송 준비:');
+    console.log('2. 전송 준비:');
     
     // .env에서 받는 주소 가져오기
     const recipientAddress = process.env.SUBMIT_ADDRESS || 
@@ -359,7 +359,7 @@ async function transferTokenExample(tokenAddress = null) {
     // ------------------------------
     // 단계 3: 가스 예측
     // ------------------------------
-    console.log('3️⃣ 가스 예측:');
+    console.log('3. 가스 예측:');
     
     const gasEstimate = await tokenContract.transfer.estimateGas(
       recipientAddress,
@@ -376,8 +376,8 @@ async function transferTokenExample(tokenAddress = null) {
     // ------------------------------
     // 단계 4: 트랜잭션 전송
     // ------------------------------
-    console.log('4️⃣ 트랜잭션 전송:');
-    console.log('  📤 전송 중...');
+    console.log('4. 트랜잭션 전송:');
+    console.log('  전송 중...');
     
     // transfer 함수 호출
     const tx = await tokenContract.transfer(recipientAddress, amountToSend);
@@ -388,12 +388,12 @@ async function transferTokenExample(tokenAddress = null) {
     // ------------------------------
     // 단계 5: 확인 대기
     // ------------------------------
-    console.log('5️⃣ 확인 대기:');
-    console.log('  ⏳ 블록에 포함되기를 기다리는 중...');
+    console.log('5. 확인 대기:');
+    console.log('  블록에 포함되기를 기다리는 중...');
     
     const receipt = await tx.wait();
     
-    console.log(`  ✅ 확인 완료!`);
+    console.log(`  확인 완료!`);
     console.log(`  - 블록 번호: ${receipt.blockNumber}`);
     console.log(`  - 가스 사용: ${receipt.gasUsed.toString()}`);
     console.log(`  - 상태: ${receipt.status === 1 ? '성공' : '실패'}`);
@@ -402,7 +402,7 @@ async function transferTokenExample(tokenAddress = null) {
     // ------------------------------
     // 단계 6: 이벤트 확인
     // ------------------------------
-    console.log('6️⃣ 이벤트 확인:');
+    console.log('6. 이벤트 확인:');
     
     // Transfer 이벤트 파싱
     const transferEvent = receipt.logs
@@ -422,16 +422,16 @@ async function transferTokenExample(tokenAddress = null) {
     }
     console.log('');
 
-    console.log(`🔗 Etherscan: https://sepolia.etherscan.io/tx/${receipt.hash}`);
+    console.log(`Etherscan: https://sepolia.etherscan.io/tx/${receipt.hash}`);
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
     
     // 일반적인 에러 원인
     if (error.message.includes('insufficient funds')) {
-      console.log('💡 원인: ETH 잔액 부족 (가스비용)');
+      console.log('원인: ETH 잔액 부족 (가스비용)');
     } else if (error.message.includes('execution reverted')) {
-      console.log('💡 원인: 컨트랙트 실행 실패 (잔액 부족, 권한 없음 등)');
+      console.log('원인: 컨트랙트 실행 실패 (잔액 부족, 권한 없음 등)');
     }
   }
 }
@@ -441,15 +441,15 @@ async function transferTokenExample(tokenAddress = null) {
 // ============================================
 
 async function createAndTestToken() {
-  console.log('🎯 토큰 생성 및 전송 완전 테스트\n');
+  console.log('토큰 생성 및 전송 완전 테스트\n');
   console.log('이 함수는 다음을 수행합니다:');
   console.log('1. 새로운 ERC-20 토큰 생성');
   console.log('2. 생성된 토큰으로 전송 테스트');
   console.log('3. 잔액 확인\n');
-  console.log('⏳ 약 2-3분 소요됩니다...\n');
+  console.log('약 2-3분 소요됩니다...\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -469,7 +469,7 @@ async function createAndTestToken() {
     }
 
     // 3초 대기
-    console.log('⏳ 3초 대기 중...\n');
+    console.log('3초 대기 중...\n');
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     // 단계 2: 토큰 전송 테스트
@@ -492,10 +492,10 @@ async function createAndTestToken() {
     
     const tx = await tokenContract.transfer(recipientAddress, sendAmount);
     console.log(`   트랜잭션 해시: ${tx.hash}`);
-    console.log('   ⏳ 확인 대기 중...');
+    console.log('   확인 대기 중...');
     
     const receipt = await tx.wait();
-    console.log('   ✅ 전송 완료!');
+    console.log('   전송 완료!');
     console.log('');
 
     // 단계 3: 잔액 확인
@@ -511,17 +511,17 @@ async function createAndTestToken() {
     console.log('');
     
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('🎉 모든 테스트 완료!');
+    console.log('모든 테스트 완료!');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     
-    console.log('📝 .env 파일에 저장하세요:');
+    console.log('.env 파일에 저장하세요:');
     console.log(`TOKEN_ADDRESS=${tokenAddress}\n`);
     
-    console.log('🔗 Etherscan에서 확인:');
+    console.log('Etherscan에서 확인:');
     console.log(`https://sepolia.etherscan.io/address/${tokenAddress}\n`);
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -530,7 +530,7 @@ async function createAndTestToken() {
 // ============================================
 
 async function approveAndTransferFromExample() {
-  console.log('🔐 Approve & TransferFrom 패턴\n');
+  console.log('Approve & TransferFrom 패턴\n');
 
   console.log('이 패턴은 DEX(탈중앙화 거래소)에서 자주 사용됩니다:');
   console.log('1. approve(): 다른 주소에게 토큰 사용 권한 부여');
@@ -544,7 +544,7 @@ async function approveAndTransferFromExample() {
   console.log('');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -556,25 +556,25 @@ async function approveAndTransferFromExample() {
     // ------------------------------
     // 단계 1: Approve (권한 부여)
     // ------------------------------
-    console.log('1️⃣ Approve - 권한 부여:');
+    console.log('1. Approve - 권한 부여:');
     
     const spenderAddress = '0x...'; // 권한을 받을 주소 (예: Uniswap Router)
     const approveAmount = ethers.parseUnits('100', 18); // 100 토큰
     
     console.log(`  - Spender: ${spenderAddress}`);
     console.log(`  - Amount: 100 토큰`);
-    console.log('  📤 Approve 트랜잭션 전송 중...');
+    console.log('  Approve 트랜잭션 전송 중...');
     
     const approveTx = await tokenContract.approve(spenderAddress, approveAmount);
     await approveTx.wait();
     
-    console.log('  ✅ Approve 완료!');
+    console.log('  Approve 완료!');
     console.log('');
 
     // ------------------------------
     // 단계 2: Allowance 확인
     // ------------------------------
-    console.log('2️⃣ Allowance 확인:');
+    console.log('2. Allowance 확인:');
     
     const allowance = await tokenContract.allowance(wallet.address, spenderAddress);
     console.log(`  - 허용된 금액: ${ethers.formatUnits(allowance, 18)} 토큰`);
@@ -583,17 +583,17 @@ async function approveAndTransferFromExample() {
     // ------------------------------
     // 단계 3: 권한 취소 (선택)
     // ------------------------------
-    console.log('3️⃣ Approve 취소 (보안):');
+    console.log('3. Approve 취소 (보안):');
     console.log('  사용 후에는 권한을 0으로 재설정하는 것이 안전합니다');
     
     const revokeTx = await tokenContract.approve(spenderAddress, 0);
     await revokeTx.wait();
     
-    console.log('  ✅ 권한 취소 완료!');
+    console.log('  권한 취소 완료!');
     console.log('');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -602,10 +602,10 @@ async function approveAndTransferFromExample() {
 // ============================================
 
 async function customGasExample() {
-  console.log('⛽ 가스 설정 커스터마이즈\n');
+  console.log('가스 설정 커스터마이즈\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -623,15 +623,15 @@ async function customGasExample() {
     // ------------------------------
     // 방법 1: 자동 가스 설정 (기본)
     // ------------------------------
-    console.log('1️⃣ 자동 가스 설정:');
+    console.log('1. 자동 가스 설정:');
     const tx1 = await tokenContract.transfer(recipientAddress, amount);
-    console.log('  ✅ 자동으로 최적의 가스 설정');
+    console.log('  자동으로 최적의 가스 설정');
     console.log('');
 
     // ------------------------------
     // 방법 2: 수동 가스 설정
     // ------------------------------
-    console.log('2️⃣ 수동 가스 설정:');
+    console.log('2. 수동 가스 설정:');
     
     // 현재 가스 가격 조회
     const feeData = await provider.getFeeData();
@@ -641,7 +641,7 @@ async function customGasExample() {
       gasPrice: feeData.gasPrice,  // 가스 가격
     });
     
-    console.log('  ✅ 수동으로 가스 설정');
+    console.log('  수동으로 가스 설정');
     console.log(`  - Gas Limit: 100000`);
     console.log(`  - Gas Price: ${ethers.formatUnits(feeData.gasPrice, 'gwei')} Gwei`);
     console.log('');
@@ -649,7 +649,7 @@ async function customGasExample() {
     // ------------------------------
     // 방법 3: EIP-1559 가스 설정 (추천)
     // ------------------------------
-    console.log('3️⃣ EIP-1559 가스 설정 (추천):');
+    console.log('3. EIP-1559 가스 설정 (추천):');
     
     const tx3 = await tokenContract.transfer(recipientAddress, amount, {
       gasLimit: 100000,
@@ -657,13 +657,13 @@ async function customGasExample() {
       maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,  // 팁
     });
     
-    console.log('  ✅ EIP-1559 가스 설정');
+    console.log('  EIP-1559 가스 설정');
     console.log(`  - Max Fee: ${ethers.formatUnits(feeData.maxFeePerGas, 'gwei')} Gwei`);
     console.log(`  - Priority Fee: ${ethers.formatUnits(feeData.maxPriorityFeePerGas, 'gwei')} Gwei`);
     console.log('');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -672,7 +672,7 @@ async function customGasExample() {
 // ============================================
 
 async function eventListeningExample() {
-  console.log('👂 실시간 이벤트 리스닝 예제 (QuickNode/PublicNode)\n');
+  console.log('실시간 이벤트 리스닝 예제 (QuickNode/PublicNode)\n');
 
   try {
     // HTTP URL을 WebSocket URL로 변환
@@ -681,48 +681,48 @@ async function eventListeningExample() {
     // .env에서 RPC URL 가져오기
     const httpUrl = process.env.SEPOLIA_RPC_URL || SEPOLIA_RPC;
     
-    console.log('🔌 현재 RPC:', httpUrl);
+    console.log('현재 RPC:', httpUrl);
     
     // HTTP를 WebSocket으로 변환
     if (httpUrl.includes('publicnode.com')) {
       // PublicNode: https → wss
       wsUrl = httpUrl.replace('https://', 'wss://');
-      console.log('✅ PublicNode WebSocket:', wsUrl);
+      console.log('PublicNode WebSocket:', wsUrl);
     } else if (httpUrl.includes('quicknode')) {
       // QuickNode: https → wss
       wsUrl = httpUrl.replace('https://', 'wss://');
-      console.log('✅ QuickNode WebSocket:', wsUrl);
+      console.log('QuickNode WebSocket:', wsUrl);
     } else if (httpUrl.includes('alchemy')) {
       // Alchemy
       wsUrl = httpUrl.replace('https://', 'wss://').replace('/v3/', '/v3/');
-      console.log('✅ Alchemy WebSocket:', wsUrl);
+      console.log('Alchemy WebSocket:', wsUrl);
     } else if (httpUrl.includes('infura')) {
       // Infura
       wsUrl = httpUrl.replace('https://', 'wss://');
-      console.log('✅ Infura WebSocket:', wsUrl);
+      console.log('Infura WebSocket:', wsUrl);
     } else {
       // 기본: PublicNode 사용
       wsUrl = 'wss://ethereum-sepolia-rpc.publicnode.com';
-      console.log('✅ 기본 WebSocket (PublicNode):', wsUrl);
+      console.log('기본 WebSocket (PublicNode):', wsUrl);
     }
     
     console.log('');
-    console.log('🎧 Transfer 이벤트를 실시간으로 모니터링합니다...');
-    console.log('⏳ 10초간 모니터링 (Ctrl+C로 중단)\n');
+    console.log('Transfer 이벤트를 실시간으로 모니터링합니다...');
+    console.log('10초간 모니터링 (Ctrl+C로 중단)\n');
 
     // WebSocket Provider 생성
     const wsProvider = new ethers.WebSocketProvider(wsUrl);
     
     // 에러 처리
     wsProvider.on('error', (error) => {
-      console.error('❌ WebSocket 에러:', error.message);
+      console.error('WebSocket 에러:', error.message);
     });
 
     // 토큰 주소 (.env에서 가져오기)
     const TOKEN_ADDRESS = process.env.TOKEN_ADDRESS || 
                           '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'; // Sepolia USDC
     
-    console.log('📍 모니터링 중인 토큰:', TOKEN_ADDRESS);
+    console.log('모니터링 중인 토큰:', TOKEN_ADDRESS);
     console.log('');
     
     const tokenContract = new ethers.Contract(TOKEN_ADDRESS, ERC20_ABI, wsProvider);
@@ -732,7 +732,7 @@ async function eventListeningExample() {
     
     tokenContract.on('Transfer', async (from, to, amount, event) => {
       eventCount++;
-      console.log(`📬 Transfer #${eventCount} 감지!`);
+      console.log(`Transfer #${eventCount} 감지!`);
       console.log(`  From: ${from.slice(0, 10)}...`);
       console.log(`  To: ${to.slice(0, 10)}...`);
       
@@ -755,11 +755,11 @@ async function eventListeningExample() {
       await wsProvider.destroy();
       
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log(`✅ 리스닝 중단 (총 ${eventCount}개 이벤트 감지)`);
+      console.log(`리스닝 중단 (총 ${eventCount}개 이벤트 감지)`);
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
       
       if (eventCount === 0) {
-        console.log('💡 이벤트가 없었습니다!');
+        console.log('이벤트가 없었습니다!');
         console.log('   - 테스트 토큰이 활발하지 않을 수 있습니다');
         console.log('   - queryPastEventsExample()로 과거 이벤트 확인하세요');
         console.log('   - 또는 본인 토큰을 생성하고 전송해보세요\n');
@@ -767,10 +767,10 @@ async function eventListeningExample() {
     }, 10000);
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
     
     if (error.message.includes('404') || error.message.includes('Unexpected server response')) {
-      console.log('\n💡 WebSocket 연결 실패!');
+      console.log('\nWebSocket 연결 실패!');
       console.log('   - RPC가 WebSocket을 지원하지 않을 수 있습니다');
       console.log('   - queryPastEventsExample()을 대신 사용하세요\n');
     }
@@ -782,7 +782,7 @@ async function eventListeningExample() {
 // ============================================
 
 async function queryPastEventsDetailedExample() {
-  console.log('📜 과거 이벤트 상세 조회 (QuickNode/PublicNode)\n');
+  console.log('과거 이벤트 상세 조회 (QuickNode/PublicNode)\n');
 
   // .env에서 토큰 주소 가져오기 (없으면 Sepolia USDC 사용)
   const TOKEN_ADDRESS = process.env.TOKEN_ADDRESS || 
@@ -879,7 +879,7 @@ async function queryPastEventsDetailedExample() {
     }
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
     
     if (error.message.includes('invalid address')) {
       console.log('💡 원인: 토큰 주소가 잘못되었습니다');
@@ -977,10 +977,10 @@ console.log('━━━━━━━━━━━━━━━━━━━━━━�
 //
 // 2단계: 실시간 이벤트 리스닝 (WebSocket - QuickNode/PublicNode)
 //eventListeningExample();
-queryPastEventsDetailedExample();
+// queryPastEventsDetailedExample();
 //
 // 3단계: 토큰 생성
-// createNewTokenExample();
+createNewTokenExample();
 //
 // 4단계: 토큰 생성+전송+이벤트 확인 (완전한 테스트)
 // createAndTestToken();

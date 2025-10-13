@@ -1,10 +1,10 @@
 /**
- * 💸 예제 3: Transaction - 트랜잭션 보내기
+ * 예제 3: Transaction - 트랜잭션 보내기
  * 
  * 트랜잭션은 블록체인에 데이터를 "쓰는" 작업입니다.
  * ETH 전송, 컨트랙트 실행 등이 모두 트랜잭션입니다.
  * 
- * ⚠️ 주의: 
+ * 주의: 
  * - 트랜잭션은 가스비(수수료)가 필요합니다
  * - 한번 보내면 되돌릴 수 없습니다
  * - 처음엔 반드시 테스트넷을 사용하세요!
@@ -13,7 +13,10 @@
 // .env 파일에서 환경 변수 불러오기
 require('dotenv').config();
 
+
 const { ethers } = require('ethers');
+
+
 
 // ============================================
 // 1. 기본 설정
@@ -33,7 +36,8 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY || 'YOUR_PRIVATE_KEY_HERE';
 // 2. 트랜잭션의 구조
 // ============================================
 
-console.log('📋 트랜잭션의 구조\n');
+console.log('트랜잭션의 구조\n');
+// https://github.com/ethereum/go-ethereum/blob/master/internal/ethapi/transaction_args.go#L42
 
 const transactionStructure = {
   to: '0x...',           // 받는 사람 주소 (필수)
@@ -61,12 +65,12 @@ console.log('');
 // ============================================
 
 async function sendEthExample() {
-  console.log('💸 ETH 전송 예제\n');
+  console.log('ETH 전송 예제\n');
 
   // 개인키가 설정되지 않았는지 확인
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!');
-    console.log('💡 실행하려면:');
+    console.log('개인키가 설정되지 않았습니다!');
+    console.log('실행하려면:');
     console.log('1. Sepolia 테스트넷 지갑 생성');
     console.log('2. https://sepoliafaucet.com/ 에서 테스트 ETH 받기');
     console.log('3. 개인키를 PRIVATE_KEY 변수에 설정');
@@ -78,7 +82,7 @@ async function sendEthExample() {
     // 지갑 생성 및 Provider 연결
     const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
     
-    console.log('📋 전송 정보:');
+    console.log('전송 정보:');
     console.log('  - 보내는 주소:', wallet.address);
 
     // 잔액 확인
@@ -87,15 +91,15 @@ async function sendEthExample() {
     console.log('  - 현재 잔액:', balanceEth, 'ETH');
 
     if (balance === 0n) {
-      console.log('\n❌ 잔액이 0입니다!');
-      console.log('💡 https://sepoliafaucet.com/ 에서 테스트 ETH를 받으세요');
+      console.log('\n잔액이 0입니다!');
+      console.log('https://sepoliafaucet.com/ 에서 테스트 ETH를 받으세요');
       return;
     }
 
     // 트랜잭션 생성
     const tx = {
       to: '0x0000000000000000000000000000000000000000', // 받는 사람 주소
-      value: ethers.parseEther('0.001'), // 0.001 ETH 전송
+      value: ethers.parseEther('0.0001'), // 0.0001 ETH 전송
     };
 
     console.log('  - 받는 주소:', tx.to);
@@ -104,7 +108,7 @@ async function sendEthExample() {
 
     // 가스 예측
     const gasEstimate = await wallet.estimateGas(tx);
-    console.log('⛽ 가스 정보:');
+    console.log('가스 정보:');
     console.log('  - 예상 가스:', gasEstimate.toString());
 
     const feeData = await provider.getFeeData();
@@ -114,7 +118,7 @@ async function sendEthExample() {
     console.log('');
 
     // 트랜잭션 전송
-    console.log('📤 트랜잭션 전송 중...');
+    console.log('트랜잭션 전송 중...');
     const txResponse = await wallet.sendTransaction(tx);
     
     console.log('  - 트랜잭션 해시:', txResponse.hash);
@@ -122,19 +126,19 @@ async function sendEthExample() {
     console.log('');
 
     // 트랜잭션 확인 대기
-    console.log('⏳ 블록에 포함되기를 기다리는 중...');
+    console.log('블록에 포함되기를 기다리는 중...');
     const receipt = await txResponse.wait();
 
     console.log('');
-    console.log('✅ 트랜잭션 완료!');
+    console.log('트랜잭션 완료!');
     console.log('  - 블록 번호:', receipt.blockNumber);
     console.log('  - 실제 사용된 가스:', receipt.gasUsed.toString());
     console.log('  - 상태:', receipt.status === 1 ? '성공' : '실패');
     console.log('');
-    console.log('🔗 확인하기:', `https://sepolia.etherscan.io/tx/${receipt.hash}`);
+    console.log('확인하기:', `https://sepolia.etherscan.io/tx/${receipt.hash}`);
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -143,10 +147,10 @@ async function sendEthExample() {
 // ============================================
 
 async function multipleTransactionsExample() {
-  console.log('📚 여러 트랜잭션 보내기\n');
+  console.log('여러 트랜잭션 보내기\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -164,7 +168,7 @@ async function multipleTransactionsExample() {
     for (let i = 0; i < 3; i++) {
       const tx = {
         to: '0x0000000000000000000000000000000000000000',
-        value: ethers.parseEther('0.0001'),
+        value: ethers.parseEther('0.00001'),
         nonce: nonce + i, // 각각 다른 nonce 사용
       };
 
@@ -175,15 +179,15 @@ async function multipleTransactionsExample() {
     }
 
     console.log('');
-    console.log('⏳ 모든 트랜잭션 확인 대기...');
+    console.log('모든 트랜잭션 확인 대기...');
 
     // 모든 트랜잭션이 완료될 때까지 대기
     await Promise.all(transactions.map(tx => tx.wait()));
 
-    console.log('✅ 모든 트랜잭션 완료!');
+    console.log('모든 트랜잭션 완료!');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -192,10 +196,10 @@ async function multipleTransactionsExample() {
 // ============================================
 
 async function monitorTransactionExample() {
-  console.log('👀 트랜잭션 모니터링\n');
+  console.log('트랜잭션 모니터링\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -204,31 +208,31 @@ async function monitorTransactionExample() {
 
     const tx = {
       to: '0x0000000000000000000000000000000000000000',
-      value: ethers.parseEther('0.001'),
+      value: ethers.parseEther('0.00001'),
     };
 
-    console.log('📤 트랜잭션 전송...');
+    console.log('트랜잭션 전송...');
     const txResponse = await wallet.sendTransaction(tx);
     console.log('트랜잭션 해시:', txResponse.hash);
     console.log('');
 
     // 1개 블록 확인 대기
-    console.log('⏳ 1개 블록 확인 대기...');
+    console.log('1개 블록 확인 대기...');
     const receipt1 = await txResponse.wait(1);
-    console.log('✅ 1개 블록 확인됨 (블록:', receipt1.blockNumber + ')');
+    console.log('1개 블록 확인됨 (블록:', receipt1.blockNumber + ')');
 
     // 3개 블록 확인 대기 (더 안전)
-    console.log('⏳ 3개 블록 확인 대기...');
+    console.log('3개 블록 확인 대기...');
     const receipt3 = await txResponse.wait(3);
-    console.log('✅ 3개 블록 확인됨 (블록:', receipt3.blockNumber + ')');
+    console.log('3개 블록 확인됨 (블록:', receipt3.blockNumber + ')');
 
     console.log('');
-    console.log('💡 블록 확인 수가 많을수록 더 안전합니다');
+    console.log('블록 확인 수가 많을수록 더 안전합니다');
     console.log('   - 소액 거래: 1-3개 블록');
     console.log('   - 중요한 거래: 12개 블록 이상 권장');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -236,7 +240,7 @@ async function monitorTransactionExample() {
 // 6. 실전 팁
 // ============================================
 
-console.log('💡 트랜잭션 실전 팁\n');
+console.log('트랜잭션 실전 팁\n');
 
 console.log('1. 가스 설정:');
 console.log('   - gasLimit: 너무 낮으면 실패, 너무 높으면 남은 가스는 환불됨');
@@ -256,22 +260,15 @@ console.log('   - 여러 트랜잭션 동시 전송시 수동 관리 필요');
 console.log('   - Nonce가 꼬이면 트랜잭션이 pending 상태로 남음');
 console.log('');
 
-console.log('4. 안전 수칙:');
-console.log('   - 처음엔 반드시 테스트넷 사용');
-console.log('   - 메인넷 사용시 소액으로 먼저 테스트');
-console.log('   - 트랜잭션 전송 전 항상 주소 확인');
-console.log('   - 가스비 미리 확인');
-console.log('');
-
 // ============================================
 // 7. 가스 최적화 예제
 // ============================================
 
 async function gasOptimizationExample() {
-  console.log('⛽ 가스 최적화 예제\n');
+  console.log('가스 최적화 예제\n');
 
   if (PRIVATE_KEY === 'YOUR_PRIVATE_KEY_HERE') {
-    console.log('❌ 개인키가 설정되지 않았습니다!\n');
+    console.log('개인키가 설정되지 않았습니다!\n');
     return;
   }
 
@@ -280,36 +277,36 @@ async function gasOptimizationExample() {
 
     const tx = {
       to: '0x0000000000000000000000000000000000000000',
-      value: ethers.parseEther('0.001'),
+      value: ethers.parseEther('0.00001'),
     };
 
     // 1. 가스 예측
-    console.log('1️⃣ 가스 예측:');
+    console.log('1. 가스 예측:');
     const gasEstimate = await wallet.estimateGas(tx);
     console.log('   예상 가스:', gasEstimate.toString());
 
     // 2. 현재 가스 가격 확인
     console.log('');
-    console.log('2️⃣ 가스 가격 확인:');
+    console.log('2. 가스 가격 확인:');
     const feeData = await provider.getFeeData();
     console.log('   현재 가스 가격:', ethers.formatUnits(feeData.gasPrice, 'gwei'), 'Gwei');
 
     // 3. 총 비용 계산
     console.log('');
-    console.log('3️⃣ 총 비용 계산:');
+    console.log('3. 총 비용 계산:');
     const totalCost = gasEstimate * feeData.gasPrice;
     console.log('   예상 수수료:', ethers.formatEther(totalCost), 'ETH');
 
-    // 4. 가스비 절약 팁
+
     console.log('');
-    console.log('💡 가스비 절약 팁:');
+    console.log('가스비 절약 팁:');
     console.log('   - 네트워크가 한산할 때 전송 (새벽 시간대)');
     console.log('   - 급하지 않으면 가스 가격을 낮게 설정');
     console.log('   - 여러 작업을 한 번에 묶어서 실행');
     console.log('   - L2 솔루션 사용 (Arbitrum, Optimism 등)');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 }
 
@@ -317,14 +314,14 @@ async function gasOptimizationExample() {
 // 실행
 // ============================================
 
-console.log('\n💡 사용법:');
+console.log('\n사용법:');
 console.log('1. Sepolia 테스트넷 준비:');
 console.log('   - MetaMask 같은 지갑에서 Sepolia 네트워크 추가');
 console.log('   - https://sepoliafaucet.com/ 에서 테스트 ETH 받기');
 console.log('');
 console.log('2. 개인키 설정:');
 console.log('   - PRIVATE_KEY 변수에 테스트 지갑 개인키 입력');
-console.log('   - ⚠️ 테스트 지갑만 사용하세요!');
+console.log('   - 테스트 지갑만 사용하세요!');
 console.log('');
 console.log('3. 함수 실행:');
 console.log('   sendEthExample();');
@@ -344,28 +341,3 @@ console.log('');
 //multipleTransactionsExample();
 //monitorTransactionExample();
 gasOptimizationExample();
-
-// 방법 2: 순차적으로 모두 실행 (고급)
-// 모든 함수를 차례대로 실행하려면 아래 함수를 사용하세요
-async function runAllExamples() {
-  console.log('🚀 모든 예제를 순차적으로 실행합니다...\n');
-  
-  await sendEthExample();
-  console.log('\n⏳ 3초 대기 중...\n');
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  
-  await multipleTransactionsExample();
-  console.log('\n⏳ 3초 대기 중...\n');
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  
-  await monitorTransactionExample();
-  console.log('\n⏳ 3초 대기 중...\n');
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  
-  await gasOptimizationExample();
-  
-  console.log('\n✅ 모든 예제 실행 완료!');
-}
-
-// 모든 예제를 순차적으로 실행하려면 주석 해제
-// runAllExamples();

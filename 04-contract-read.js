@@ -1,5 +1,5 @@
 /**
- * 📖 예제 4: Contract Read - 스마트 컨트랙트 읽기
+ * 예제 4: Contract Read - 스마트 컨트랙트 읽기
  * 
  * 스마트 컨트랙트는 블록체인 위의 프로그램입니다.
  * 컨트랙트를 읽기 위해서는 2가지가 필요합니다:
@@ -18,7 +18,7 @@ const { ethers } = require('ethers');
 // 1. ABI란 무엇인가?
 // ============================================
 
-console.log('📋 ABI (Application Binary Interface)란?\n');
+console.log('ABI (Application Binary Interface)란?\n');
 
 console.log('ABI는 스마트 컨트랙트의 "사용 설명서"입니다.');
 console.log('컨트랙트에 어떤 함수가 있는지, 어떤 매개변수가 필요한지 알려줍니다.\n');
@@ -58,7 +58,7 @@ const ERC20_ABI = [
 
 console.log('ERC-20 ABI 예시:');
 console.log(ERC20_ABI);
-console.log('\n💡 이렇게 사람이 읽기 쉬운 형식도 가능합니다!\n');
+console.log('\n이렇게 사람이 읽기 쉬운 형식도 가능합니다!\n');
 
 // ============================================
 // 3. 컨트랙트 인스턴스 생성
@@ -71,20 +71,20 @@ const testTokenContract = new ethers.Contract(
   provider             // Provider (읽기만 할 경우)
 );
 
-console.log('✅ 테스트 토큰 컨트랙트 객체 생성 완료!\n');
+console.log('테스트 토큰 컨트랙트 객체 생성 완료!\n');
 
 // ============================================
 // 4. 컨트랙트 읽기 예제
 // ============================================
 
 async function readContractExamples() {
-  console.log('📖 컨트랙트 읽기 예제 (Sepolia 테스트넷)\n');
+  console.log('컨트랙트 읽기 예제 (Sepolia 테스트넷)\n');
 
   try {
     // ------------------------------
     // 예제 4-1: 토큰 기본 정보 조회
     // ------------------------------
-    console.log('1️⃣ 토큰 기본 정보:');
+    console.log('1. 토큰 기본 정보:');
     
     const name = await testTokenContract.name();
     const symbol = await testTokenContract.symbol();
@@ -98,7 +98,7 @@ async function readContractExamples() {
     // ------------------------------
     // 예제 4-2: 총 공급량 조회
     // ------------------------------
-    console.log('2️⃣ 총 공급량:');
+    console.log('2. 총 공급량:');
     
     const totalSupply = await testTokenContract.totalSupply();
     
@@ -113,7 +113,7 @@ async function readContractExamples() {
     // ------------------------------
     // 예제 4-3: 특정 주소의 잔액 조회
     // ------------------------------
-    console.log('3️⃣ 잔액 조회:');
+    console.log('3. 잔액 조회:');
     
     // .env 파일에서 지갑 주소 가져오기
     const myAddress = process.env.WALLET_ADDRESS || '0x0000000000000000000000000000000000000000';
@@ -124,14 +124,14 @@ async function readContractExamples() {
     console.log('  - 잔액:', balanceFormatted, symbol);
     
     if (myAddress === '0x0000000000000000000000000000000000000000') {
-      console.log('  💡 .env 파일에 WALLET_ADDRESS를 설정하면 실제 잔액을 볼 수 있습니다');
+      console.log('  .env 파일에 WALLET_ADDRESS를 설정하면 실제 잔액을 볼 수 있습니다');
     }
     console.log('');
 
     // ------------------------------
     // 예제 4-4: 여러 주소의 잔액 한번에 조회
     // ------------------------------
-    console.log('4️⃣ 여러 주소 잔액 조회:');
+    console.log('4. 여러 주소 잔액 조회:');
     
     // .env 파일에서 여러 지갑 주소 가져오기
     const addresses = [];
@@ -169,15 +169,15 @@ async function readContractExamples() {
     });
     
     if (!process.env.WALLET_ADDRESS) {
-      console.log('  💡 .env 파일에 WALLET_ADDRESS, WALLET_ADDRESS_2 등을 설정하세요');
+      console.log('  .env 파일에 WALLET_ADDRESS, WALLET_ADDRESS_2 등을 설정하세요');
     }
     console.log('');
 
   } catch (error) {
-    console.error('❌ 에러:', error.message);
+    console.error('에러:', error.message);
   }
 
-  console.log('✅ 읽기 예제 완료!\n');
+  console.log('읽기 예제 완료!\n');
 }
 
 // ============================================
@@ -185,9 +185,9 @@ async function readContractExamples() {
 // ============================================
 
 async function uniswapExample() {
-  console.log('🦄 Uniswap 컨트랙트 읽기 (Sepolia 테스트넷)\n');
+  console.log('Uniswap 컨트랙트 읽기 (Sepolia 테스트넷)\n');
 
-  console.log('💡 참고: Sepolia에는 Uniswap V2가 배포되어 있지 않을 수 있습니다.');
+  console.log('참고: Sepolia에는 Uniswap V2가 배포되어 있지 않을 수 있습니다.');
   console.log('대신 다른 테스트 DEX를 사용하거나, 직접 컨트랙트를 배포해야 합니다.');
   console.log('');
   
@@ -209,9 +209,9 @@ async function uniswapExample() {
 // ============================================
 
 async function ensExample() {
-  console.log('🏷️ ENS 컨트랙트 읽기\n');
+  console.log('ENS 컨트랙트 읽기\n');
 
-  console.log('💡 참고: ENS는 메인넷에서만 완전히 지원됩니다.');
+  console.log('참고: ENS는 메인넷에서만 완전히 지원됩니다.');
   console.log('Sepolia 테스트넷에서는 제한적으로 지원됩니다.');
   console.log('');
   
@@ -231,7 +231,7 @@ async function ensExample() {
 // 7. 실전 팁
 // ============================================
 
-console.log('💡 컨트랙트 읽기 실전 팁\n');
+console.log('컨트랙트 읽기 실전 팁\n');
 
 console.log('1. ABI 구하는 방법:');
 console.log('   - Etherscan에서 Verified 컨트랙트의 ABI 복사');
@@ -261,14 +261,14 @@ console.log('');
 // 8. 전체 ABI vs Human-Readable ABI 비교
 // ============================================
 
-console.log('📚 ABI 형식 비교\n');
+console.log('ABI 형식 비교\n');
 
 console.log('Human-Readable ABI (추천):');
 console.log(`const abi = [
   'function name() view returns (string)',
   'function balanceOf(address) view returns (uint256)'
 ];`);
-console.log('✅ 읽기 쉬움, 필요한 것만 작성\n');
+console.log('읽기 쉬움, 필요한 것만 작성\n');
 
 console.log('Full JSON ABI:');
 console.log(`const abi = [
@@ -280,13 +280,13 @@ console.log(`const abi = [
     "stateMutability": "view"
   }
 ];`);
-console.log('✅ 완전한 정보, Etherscan에서 복사\n');
+console.log('완전한 정보, Etherscan에서 복사\n');
 
 // ============================================
 // 9. ABI 얻는 방법 실습
 // ============================================
 
-console.log('🔍 ABI 얻는 방법\n');
+console.log('ABI 얻는 방법\n');
 
 console.log('방법 1: Etherscan에서 복사');
 console.log('1. https://etherscan.io/ 접속');
@@ -310,13 +310,13 @@ console.log('');
 // 실행
 // ============================================
 
-console.log('\n💡 사용법 (Sepolia 테스트넷):');
+console.log('\n사용법 (Sepolia 테스트넷):');
 console.log('주석을 해제하고 실행하세요:');
 console.log('  readContractExamples();');
 console.log('  uniswapExample();  // 참고용 (Sepolia에 배포 안됨)');
 console.log('  ensExample();      // 참고용 (메인넷 기능)');
 console.log('');
-console.log('⚠️ 주의: Sepolia 테스트 토큰 주소를 사용합니다');
+console.log('주의: Sepolia 테스트 토큰 주소를 사용합니다');
 console.log('실제 토큰 잔액을 보려면 본인의 Sepolia 주소로 변경하세요');
 console.log('');
 
