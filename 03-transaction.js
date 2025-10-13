@@ -229,25 +229,25 @@ async function monitorTransactionExample() {
 // 6. 실전 팁
 // ============================================
 
-console.log('트랜잭션 실전 팁\n');
+// console.log('트랜잭션 실전 팁\n');
 
-console.log('1. 가스 설정:');
-console.log('   - gasLimit: 너무 낮으면 실패, 너무 높으면 남은 가스는 환불됨');
-console.log('   - estimateGas()로 미리 예측하는 게 좋습니다');
-console.log('   - 예측값 * 1.2 정도로 여유를 두는 것이 안전');
-console.log('');
+// console.log('1. 가스 설정:');
+// console.log('   - gasLimit: 너무 낮으면 실패, 너무 높으면 남은 가스는 환불됨');
+// console.log('   - estimateGas()로 미리 예측하는 게 좋습니다');
+// console.log('   - 예측값 * 1.2 정도로 여유를 두는 것이 안전');
+// console.log('');
 
-console.log('2. 가스 가격:');
-console.log('   - 높을수록 빨리 처리됨');
-console.log('   - ethgasstation.info 같은 사이트에서 현재 가격 확인');
-console.log('   - getFeeData()로 적정 가격 자동 설정');
-console.log('');
+// console.log('2. 가스 가격:');
+// console.log('   - 높을수록 빨리 처리됨');
+// console.log('   - ethgasstation.info 같은 사이트에서 현재 가격 확인');
+// console.log('   - getFeeData()로 적정 가격 자동 설정');
+// console.log('');
 
-console.log('3. Nonce:');
-console.log('   - 자동으로 관리되므로 보통 신경 안써도 됨');
-console.log('   - 여러 트랜잭션 동시 전송시 수동 관리 필요');
-console.log('   - Nonce가 꼬이면 트랜잭션이 pending 상태로 남음');
-console.log('');
+// console.log('3. Nonce:');
+// console.log('   - 자동으로 관리되므로 보통 신경 안써도 됨');
+// console.log('   - 여러 트랜잭션 동시 전송시 수동 관리 필요');
+// console.log('   - Nonce가 꼬이면 트랜잭션이 pending 상태로 남음');
+// console.log('');
 
 // ============================================
 // 7. 가스 최적화 예제
@@ -286,6 +286,17 @@ async function gasOptimizationExample() {
     const totalCost = gasEstimate * feeData.gasPrice;
     console.log('   예상 수수료:', ethers.formatEther(totalCost), 'ETH');
 
+    
+    // const zeroGasPrice = BigInt(0)
+    // console.log('   zero 가스:', ethers.formatUnits(zeroGasPrice, 'gwei'), 'Gwei');
+    // const txResponse = await wallet.sendTransaction({
+    //   to: '0x0000000000000000000000000000000000000000',
+    //   value: ethers.parseEther('0.00001'),
+    //   gasLimit: gasEstimate,
+    //   gasPrice: zeroGasPrice,
+    // });
+    // console.log('트랜잭션 해시:', txResponse.hash);
+
 
     console.log('');
     console.log('가스비 절약 팁:');
@@ -309,4 +320,4 @@ async function gasOptimizationExample() {
 //sendEthExample();
 //multipleTransactionsExample();
 //monitorTransactionExample();
-//gasOptimizationExample();
+gasOptimizationExample();
