@@ -14,7 +14,7 @@ const { ethers } = require('ethers');
 /**
  * ERC-20 토큰의 모든 정보를 한번에 조회하는 함수
  */
-async function getTokenInfo(tokenAddress, userAddress, providerUrl = 'https://rpc.sepolia.org') {
+async function getTokenInfo(tokenAddress, userAddress, providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
   
   const ERC20_ABI = [
@@ -81,7 +81,7 @@ async function tokenInfoExample() {
 /**
  * 여러 주소의 ETH & 토큰 잔액을 한번에 조회
  */
-async function getMultipleBalances(addresses, tokenAddress = null, providerUrl = 'https://rpc.sepolia.org') {
+async function getMultipleBalances(addresses, tokenAddress = null, providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
   
   const results = [];
@@ -162,7 +162,7 @@ async function multipleBalancesExample() {
 /**
  * 현재 가스 가격을 추적하고 분석
  */
-async function getGasAnalysis(providerUrl = 'https://rpc.sepolia.org') {
+async function getGasAnalysis(providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
 
   try {
@@ -226,7 +226,7 @@ async function gasAnalysisExample() {
 /**
  * 트랜잭션 상태를 계속 추적하고 업데이트 제공
  */
-async function trackTransaction(txHash, providerUrl = 'https://rpc.sepolia.org') {
+async function trackTransaction(txHash, providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
 
   console.log(`트랜잭션 추적 시작: ${txHash}\n`);
@@ -309,7 +309,7 @@ async function safeTransferToken(
   tokenAddress,
   recipientAddress,
   amount,
-  providerUrl = 'https://rpc.sepolia.org'
+  providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com'
 ) {
   const provider = new ethers.JsonRpcProvider(providerUrl);
   const wallet = new ethers.Wallet(privateKey, provider);
@@ -423,7 +423,7 @@ async function safeTransferToken(
 /**
  * 사용자의 전체 포트폴리오 조회
  */
-async function getPortfolio(userAddress, tokenAddresses, providerUrl = 'https://rpc.sepolia.org') {
+async function getPortfolio(userAddress, tokenAddresses, providerUrl = 'https://ethereum-sepolia-rpc.publicnode.com') {
   const provider = new ethers.JsonRpcProvider(providerUrl);
 
   console.log(`포트폴리오 조회: ${userAddress}\n`);

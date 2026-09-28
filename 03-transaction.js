@@ -24,12 +24,12 @@ const { ethers } = require('ethers');
 
 // 테스트넷 Provider (Sepolia)
 // Sepolia는 이더리움 테스트 네트워크입니다 (가짜 돈 사용)
-const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
+const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://ethereum-sepolia-rpc.publicnode.com';
 const provider = new ethers.JsonRpcProvider(SEPOLIA_RPC);
 
 // .env 파일에서 개인키 가져오기
 // ⚠️ Sepolia 테스트 ETH는 faucet에서 무료로 받을 수 있습니다
-// https://sepoliafaucet.com/
+// https://www.alchemy.com/faucets/ethereum-sepolia
 const PRIVATE_KEY = process.env.PRIVATE_KEY || 'YOUR_PRIVATE_KEY_HERE';
 
 // ============================================
@@ -72,7 +72,7 @@ async function sendEthExample() {
     console.log('개인키가 설정되지 않았습니다!');
     console.log('실행하려면:');
     console.log('1. Sepolia 테스트넷 지갑 생성');
-    console.log('2. https://sepoliafaucet.com/ 에서 테스트 ETH 받기');
+    console.log('2. https://www.alchemy.com/faucets/ethereum-sepolia 에서 테스트 ETH 받기');
     console.log('3. 개인키를 PRIVATE_KEY 변수에 설정');
     console.log('');
     return;
@@ -92,7 +92,7 @@ async function sendEthExample() {
 
     if (balance === 0n) {
       console.log('\n잔액이 0입니다!');
-      console.log('https://sepoliafaucet.com/ 에서 테스트 ETH를 받으세요');
+      console.log('https://www.alchemy.com/faucets/ethereum-sepolia 에서 테스트 ETH를 받으세요');
       return;
     }
 

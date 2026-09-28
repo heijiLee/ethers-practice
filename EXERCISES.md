@@ -18,7 +18,7 @@
 <summary>💡 힌트</summary>
 
 ```javascript
-const provider = new ethers.JsonRpcProvider('https://eth.public-rpc.com');
+const provider = new ethers.JsonRpcProvider('https://ethereum-rpc.publicnode.com');
 const balance = await provider.getBalance(address);
 const balanceEth = ethers.formatEther(balance);
 ```

@@ -20,7 +20,7 @@ const { ethers } = require('ethers');
 
 ```javascript
 // 공개 RPC
-const provider = new ethers.JsonRpcProvider('https://eth.public-rpc.com');
+const provider = new ethers.JsonRpcProvider('https://ethereum-rpc.publicnode.com');
 
 // Infura
 const provider = new ethers.JsonRpcProvider(
@@ -391,15 +391,15 @@ await revokeTx.wait();
 ```javascript
 // Mainnet
 chainId: 1
-rpc: https://eth.public-rpc.com
+rpc: https://ethereum-rpc.publicnode.com
 
 // Sepolia (테스트넷)
 chainId: 11155111
-rpc: https://rpc.sepolia.org
+rpc: https://ethereum-sepolia-rpc.publicnode.com
 
 // Polygon
 chainId: 137
-rpc: https://polygon-rpc.com
+rpc: https://polygon-bor-rpc.publicnode.com
 
 // Arbitrum
 chainId: 42161

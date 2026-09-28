@@ -77,10 +77,10 @@ npm run 06  # Practical 예제
 - **02-06 모든 파일**: Sepolia 테스트넷 (실습용)
 
 **Sepolia 테스트넷 정보:**
-- RPC URL: `https://rpc.sepolia.org`
+- RPC URL: `https://ethereum-sepolia-rpc.publicnode.com`
 - Chain ID: 11155111
 - Explorer: https://sepolia.etherscan.io/
-- Faucet: https://sepoliafaucet.com/
+- Faucet: https://www.alchemy.com/faucets/ethereum-sepolia
 
 💡 **자세한 네트워크 설정은 `NETWORK_INFO.md`를 참고하세요!**
 
@@ -104,8 +104,7 @@ A: 블록체인 네트워크를 사용하는 수수료입니다. 채굴자/검�
 
 **Q: 테스트넷 ETH는 어디서 받나요?**
 A: Faucet 사이트에서 무료로 받을 수 있습니다.
-- Sepolia Faucet: https://sepoliafaucet.com/
-- Alchemy Faucet: https://www.alchemy.com/faucets
+- Sepolia Faucet (Alchemy): https://www.alchemy.com/faucets/ethereum-sepolia
 
 ---
 
@@ -188,8 +187,7 @@ A: Faucet 사이트에서 무료로 받을 수 있습니다.
 - [Tenderly](https://tenderly.co/) - 디버깅 도구
 
 ### 테스트넷 Faucet
-- [Sepolia Faucet](https://sepoliafaucet.com/)
-- [Alchemy Faucet](https://www.alchemy.com/faucets)
+- [Sepolia Faucet (Alchemy)](https://www.alchemy.com/faucets/ethereum-sepolia)
 - [Chainlink Faucet](https://faucets.chain.link/)
 
 ### API 서비스

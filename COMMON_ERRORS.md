@@ -26,7 +26,7 @@ Error: Unexpected server response: 404
 ### 문제의 코드
 ```javascript
 // ❌ HTTP Provider로는 실시간 이벤트 모니터링 불가
-const provider = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+const provider = new ethers.JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
 const contract = new ethers.Contract(address, abi, provider);
 
 contract.on('Transfer', (from, to, amount) => {
@@ -169,8 +169,7 @@ console.log('필요한 가스비:', ethers.formatEther(gasCost), 'ETH');
 ```
 
 **3. Faucet에서 ETH 받기**
-- Sepolia: https://sepoliafaucet.com/
-- Alchemy: https://www.alchemy.com/faucets
+- Sepolia (Alchemy): https://www.alchemy.com/faucets/ethereum-sepolia
 
 ---
 
@@ -287,16 +286,16 @@ RPC 노드와의 **연결이 실패**했습니다.
 const provider = new ethers.JsonRpcProvider('https://wrong-url.com');
 
 // ✅ 올바른 URL
-const provider = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+const provider = new ethers.JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
 ```
 
 **2. 다른 RPC 시도**
 ```javascript
 // Sepolia RPC 목록
 const rpcs = [
-  'https://rpc.sepolia.org',
-  'https://rpc2.sepolia.org',
-  'https://ethereum-sepolia.publicnode.com',
+  'https://ethereum-sepolia-rpc.publicnode.com',
+  'https://1rpc.io/sepolia',
+  'https://sepolia.gateway.tenderly.co',
 ];
 
 for (const rpc of rpcs) {

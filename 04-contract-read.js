@@ -29,7 +29,7 @@ console.log('컨트랙트에 어떤 함수가 있는지, 어떤 매개변수가 
 // ============================================
 
 // Provider 설정 - Sepolia 테스트넷
-const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
+const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://ethereum-sepolia-rpc.publicnode.com';
 const provider = new ethers.JsonRpcProvider(SEPOLIA_RPC);
 
 // 테스트 ERC-20 토큰 주소 (Sepolia 테스트넷)

@@ -20,7 +20,7 @@
 {
   name: "Sepolia",
   chainId: 11155111,
-  rpcUrl: "https://rpc.sepolia.org",
+  rpcUrl: "https://ethereum-sepolia-rpc.publicnode.com",
   explorer: "https://sepolia.etherscan.io/",
   currency: {
     name: "Sepolia ETH",
@@ -34,9 +34,9 @@
 
 **공개 RPC:**
 ```
-https://rpc.sepolia.org
-https://rpc2.sepolia.org
-https://ethereum-sepolia.publicnode.com
+https://ethereum-sepolia-rpc.publicnode.com
+https://1rpc.io/sepolia
+https://sepolia.gateway.tenderly.co
 ```
 
 **Infura (추천):**
@@ -52,8 +52,7 @@ https://eth-sepolia.g.alchemy.com/v2/YOUR_API_KEY
 ### 테스트 ETH 받기 (Faucet)
 
 **공식 Faucet:**
-- https://sepoliafaucet.com/ (가장 추천)
-- https://www.alchemy.com/faucets/ethereum-sepolia
+- https://www.alchemy.com/faucets/ethereum-sepolia (가장 추천)
 - https://faucet.quicknode.com/ethereum/sepolia
 - https://faucets.chain.link/sepolia
 
@@ -87,7 +86,7 @@ https://eth-sepolia.g.alchemy.com/v2/YOUR_API_KEY
 
 ```
 네트워크 이름: Sepolia
-RPC URL: https://rpc.sepolia.org
+RPC URL: https://ethereum-sepolia-rpc.publicnode.com
 체인 ID: 11155111
 통화 기호: ETH
 블록 탐색기 URL: https://sepolia.etherscan.io/
@@ -132,7 +131,7 @@ Decimals: 18
 
 **Mainnet으로 변경:**
 ```javascript
-const provider = new ethers.JsonRpcProvider('https://eth.public-rpc.com');
+const provider = new ethers.JsonRpcProvider('https://ethereum-rpc.publicnode.com');
 // 또는
 const provider = new ethers.JsonRpcProvider(
   `https://mainnet.infura.io/v3/${API_KEY}`
@@ -141,7 +140,7 @@ const provider = new ethers.JsonRpcProvider(
 
 **Sepolia로 변경:**
 ```javascript
-const provider = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+const provider = new ethers.JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
 // 또는
 const provider = new ethers.JsonRpcProvider(
   `https://sepolia.infura.io/v3/${API_KEY}`
@@ -150,14 +149,14 @@ const provider = new ethers.JsonRpcProvider(
 
 **다른 테스트넷:**
 
-**Goerli (곧 중단):**
+**Hoodi (검증자/스테이킹 테스트용, Holesky 후속):**
 ```javascript
-const provider = new ethers.JsonRpcProvider('https://rpc.goerli.eth.gateway.fm');
+const provider = new ethers.JsonRpcProvider('https://ethereum-hoodi-rpc.publicnode.com');
 ```
 
-**Polygon Mumbai:**
+**Polygon Amoy (Mumbai 후속):**
 ```javascript
-const provider = new ethers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com');
+const provider = new ethers.JsonRpcProvider('https://polygon-amoy-bor-rpc.publicnode.com');
 ```
 
 ---
@@ -267,7 +266,7 @@ async function checkNetwork() {
 ## ❓ FAQ
 
 **Q: Goerli와 Sepolia 중 무엇을 써야 하나요?**
-A: Sepolia를 사용하세요. Goerli는 곧 중단됩니다.
+A: Sepolia를 사용하세요. Goerli는 이미 중단되었습니다.
 
 **Q: 테스트 ETH가 부족해요!**
 A: 여러 Faucet을 사용하거나, Discord/Twitter에서 요청하세요.
@@ -282,8 +281,8 @@ A: 아니지만, 안정성과 속도를 위해 강력히 권장합니다.
 A: 네! Provider를 여러 개 만들면 됩니다.
 
 ```javascript
-const mainnetProvider = new ethers.JsonRpcProvider('https://eth.public-rpc.com');
-const sepoliaProvider = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+const mainnetProvider = new ethers.JsonRpcProvider('https://ethereum-rpc.publicnode.com');
+const sepoliaProvider = new ethers.JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
 ```
 
 ---

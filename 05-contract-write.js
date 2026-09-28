@@ -20,7 +20,7 @@ const { ethers } = require('ethers');
 // ============================================
 
 // 테스트넷 Provider (Sepolia)
-const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
+const SEPOLIA_RPC = process.env.SEPOLIA_RPC_URL || 'https://ethereum-sepolia-rpc.publicnode.com';
 const provider = new ethers.JsonRpcProvider(SEPOLIA_RPC);
 
 // .env 파일에서 개인키 가져오기
@@ -154,7 +154,7 @@ async function createNewTokenExample() {
     
     if (balance === 0n) {
       console.log('ETH가 없습니다! Faucet에서 테스트 ETH를 받으세요.');
-      console.log('https://sepoliafaucet.com/\n');
+      console.log('https://www.alchemy.com/faucets/ethereum-sepolia\n');
       return;
     }
     console.log('');
@@ -280,7 +280,7 @@ async function createNewTokenExample() {
     
     if (error.message.includes('insufficient funds')) {
       console.log('원인: ETH 잔액 부족 (가스비용)');
-      console.log('Faucet: https://sepoliafaucet.com/');
+      console.log('Faucet: https://www.alchemy.com/faucets/ethereum-sepolia');
     }
   }
 }
@@ -950,7 +950,7 @@ console.log('');
 console.log('📋 준비사항:');
 console.log('1. Sepolia 테스트넷 준비');
 console.log('   - 테스트 지갑 생성');
-console.log('   - Faucet에서 ETH 받기 (https://sepoliafaucet.com/)');
+console.log('   - Faucet에서 ETH 받기 (https://www.alchemy.com/faucets/ethereum-sepolia)');
 console.log('');
 console.log('2. .env 파일 설정');
 console.log('   - PRIVATE_KEY=0x...');

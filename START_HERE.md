@@ -72,7 +72,7 @@ npm run 03
 **테스트넷 준비하기:**
 1. MetaMask 설치: https://metamask.io/
 2. Sepolia 네트워크 추가
-3. Faucet에서 테스트 ETH 받기: https://sepoliafaucet.com/
+3. Faucet에서 테스트 ETH 받기: https://www.alchemy.com/faucets/ethereum-sepolia
 4. 코드에 개인키 입력 (⚠️ 테스트 지갑만!)
 
 **목표**: 테스트넷에서 트랜잭션을 보낼 수 있다
@@ -153,7 +153,7 @@ npm run 06
 → Etherscan에서 트랜잭션을 확인하세요. 실패 원인이 나옵니다.
 
 ### 4. 가스비가 없어요!
-→ Faucet에서 테스트 ETH를 받으세요: https://sepoliafaucet.com/
+→ Faucet에서 테스트 ETH를 받으세요: https://www.alchemy.com/faucets/ethereum-sepolia
 
 ### 5. 그래도 모르겠어요!
 → [Ethers.js 공식 문서](https://docs.ethers.org/)를 참고하세요.

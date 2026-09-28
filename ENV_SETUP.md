@@ -46,7 +46,7 @@ SUBMIT_ADDRESS=0x토큰을_받을_주소 (선택사항)
 
 # RPC URLs
 SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
-MAINNET_RPC_URL=https://eth.public-rpc.com
+MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com
 
 # API Keys (선택사항)
 INFURA_API_KEY=
@@ -119,7 +119,7 @@ SUBMIT_ADDRESS=0x1234567890abcdef1234567890abcdef12345678
 SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
 
 # Mainnet RPC URL (기본값 있음)
-MAINNET_RPC_URL=https://eth.public-rpc.com
+MAINNET_RPC_URL=https://ethereum-rpc.publicnode.com
 
 # Infura API Key (속도 향상)
 INFURA_API_KEY=your_infura_api_key
@@ -157,7 +157,7 @@ const { ethers } = require('ethers');
 // .env에서 값 가져오기
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const WALLET_ADDRESS = process.env.WALLET_ADDRESS;
-const RPC_URL = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
+const RPC_URL = process.env.SEPOLIA_RPC_URL || 'https://ethereum-sepolia-rpc.publicnode.com';
 
 // 사용
 const provider = new ethers.JsonRpcProvider(RPC_URL);
@@ -294,7 +294,7 @@ const testWallet = new ethers.Wallet(process.env.PRIVATE_KEY_TEST);
 ```bash
 # .env.development (개발)
 PRIVATE_KEY=0xtest...
-SEPOLIA_RPC_URL=https://rpc.sepolia.org
+SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
 
 # .env.production (배포)
 PRIVATE_KEY=0xprod...
