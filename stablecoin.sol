@@ -18,7 +18,7 @@ contract SimpleStablecoin is ERC20, ReentrancyGuard {
     
     uint256 public constant COLLATERAL_RATIO = 15000; // 150%
     uint256 public constant RATIO_PRECISION = 10000;  // 100%
-    uint256 public constant MIN_COLLATERAL = 0.1 ether;
+    uint256 public constant MIN_COLLATERAL = 0.01 ether;
     uint256 public constant LIQUIDATION_THRESHOLD = 13000; // 130%
     
     struct Vault {
